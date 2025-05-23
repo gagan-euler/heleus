@@ -4,7 +4,7 @@ import os
 import io
 import zipfile
 import requests
-from typing import Optional, Tuple, Dict, Any
+from typing import Optional, Tuple, Dict, Any, List
 from tqdm import tqdm
 
 from heleus.config import ConfigManager
@@ -200,4 +200,46 @@ class PerseusClient:
                 return True, response.json()
             return False, {"error": response.json().get('error', 'Unknown error')}
         except requests.RequestException as e:
-            return False, {"error": f"Error freezing version: {str(e)}"} 
+            return False, {"error": f"Error freezing version: {str(e)}"}
+
+    def list_versions(self) -> Tuple[bool, Dict[str, Any]]:
+        """List all frozen versions.
+
+        Returns:
+            Tuple[bool, Dict[str, Any]]: Success status and list of versions
+        """
+        try:
+            response = requests.get(f"{self.base_url}/api/v1/versions")
+            if response.status_code == 200:
+                return True, response.json()
+            return False, {"error": response.json().get('error', 'Unknown error')}
+        except requests.RequestException as e:
+            return False, {"error": f"Error listing versions: {str(e)}"}
+
+    def list_apps(self) -> Tuple[bool, Dict[str, Any]]:
+        """List all apps with their latest hashes and version tags.
+
+        Returns:
+            Tuple[bool, Dict[str, Any]]: Success status and list of apps
+        """
+        try:
+            response = requests.get(f"{self.base_url}/api/v1/apps")
+            if response.status_code == 200:
+                return True, response.json()
+            return False, {"error": response.json().get('error', 'Unknown error')}
+        except requests.RequestException as e:
+            return False, {"error": f"Error listing apps: {str(e)}"}
+
+    def list_all_app_versions(self) -> Tuple[bool, Dict[str, Any]]:
+        """List all apps with all their versions.
+
+        Returns:
+            Tuple[bool, Dict[str, Any]]: Success status and detailed app list
+        """
+        try:
+            response = requests.get(f"{self.base_url}/api/v1/apps/all")
+            if response.status_code == 200:
+                return True, response.json()
+            return False, {"error": response.json().get('error', 'Unknown error')}
+        except requests.RequestException as e:
+            return False, {"error": f"Error listing app versions: {str(e)}"} 

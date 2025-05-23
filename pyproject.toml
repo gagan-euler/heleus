@@ -9,7 +9,8 @@ readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
     "requests>=2.31.0",
-    "tqdm>=4.65.0"
+    "tqdm>=4.65.0",
+    "tabulate>=0.9.0"
 ]
 
 [tool.poetry]
@@ -25,6 +26,7 @@ packages = [{include = "heleus", from = "src"}]
 python = ">=3.8"
 requests = "^2.31.0"
 tqdm = "^4.65.0"
+tabulate = "^0.9.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"

@@ -7,6 +7,7 @@ A command-line interface for Perseus APK version management system. Heleus provi
 - Push APKs to the repository with progress tracking
 - Pull specific APKs or entire version bundles
 - Freeze versions for release
+- List versions, apps, and their details
 - Configure server settings
 - Progress bars for all file operations
 - Persistent server configuration
@@ -85,6 +86,23 @@ heleus pull app_name v1.0.0
 
 All pull operations show progress bars for download and extraction.
 
+### List Commands
+
+List all frozen versions:
+```bash
+heleus list versions
+```
+
+List all apps with their latest versions:
+```bash
+heleus list apps
+```
+
+List all apps with their complete version history:
+```bash
+heleus list all
+```
+
 ### Freeze a Version
 
 Create a frozen version for release:
@@ -99,6 +117,10 @@ heleus
   config
     server <host> <port>  Configure server connection
     show                  Display current configuration
+  list
+    versions             List all frozen versions
+    apps                 List apps with latest versions
+    all                  List all apps with full history
   push <apk_path>        Upload an APK
   pull [app] [version]   Download APK(s)
   freeze <version>       Create a frozen version
